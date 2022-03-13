@@ -96,6 +96,9 @@ const MeetingRooms = () =>{
             <Chat
               modalVisible={modalVisible}
               setModalVisible={setModalVisible}
+              roomId={roomId}
+              userName={name}
+              socket={socket}
             />
           </Modal>
 
@@ -128,6 +131,7 @@ const MeetingRooms = () =>{
               <TouchableOpacity 
               style={styles.tile}
               onPress={()=>setModalVisible(true)}
+
               >
                 <FontAwesome name={"comment"} size={24} color="#efefef" />
                 <Text style={styles.textTile}>Chat</Text>

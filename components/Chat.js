@@ -1,5 +1,5 @@
 import { Platform } from 'expo-modules-core';
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard,View,Text,StyleSheet,TextInput,SafeAreaView,TouchableOpacity } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
@@ -7,8 +7,31 @@ import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNat
 import ChatHeader from './ChatHeader';
 
 
-function Chat({setModalVisible}) {
-    const [messageText,setMessageText] = useState()
+
+function Chat({setModalVisible,roomId,userName,socket}) {
+    const [messageText,setMessageText] = useState();
+    const [messageTexts,setMessageTexts] = useState([]);
+
+    const submitMessage = ()=>{
+        socket.emit('chat message',{ roomId: roomId, userName: userName,messageText:messageText });
+        //console.log(messageText)
+        setMessageText(''); 
+    }
+
+    useEffect(() => {
+        
+        socket.on('messages',(msg) => {
+            //console.log(msg)
+            setMessageTexts(msg);
+            
+        });
+      
+        return () => {
+            setMessageTexts([]);
+          };
+        }, []);
+      
+
   return (
     <View 
         style={styles.container}
@@ -23,7 +46,12 @@ function Chat({setModalVisible}) {
                     <ChatHeader setModalVisible={setModalVisible}/>
                     {/* Chat Message */}
                     <View style={styles.chatMessages}>
-
+                    {messageTexts
+                        .map((user, index) => (
+                        <View style={styles.chatContainer} key={index}>
+                            <Text style={{ color: "white" }}>{user?.msg}</Text>
+                        </View>
+                        ))}
                     </View>
                     {/* Type ege */}
                     <View style={styles.chatFormContainer}>
@@ -43,6 +71,7 @@ function Chat({setModalVisible}) {
                                 ...styles.button,
                                 backgroundColor: messageText?'#0b71eb':'#373538'
                             }}
+                            onPress={()=>submitMessage()}
                         >
                             <FontAwesome name={'send'} size={18} color="#efefef" />
                         </TouchableOpacity>
