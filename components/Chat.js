@@ -9,6 +9,7 @@ import ChatHeader from './ChatHeader';
 import MessageList from './MessageList';
 import SendMessage from './SendMessage';
 import RecivedMessage from './RecivedMessage';
+import base64 from 'react-native-base64'
 
 
 
@@ -18,14 +19,16 @@ function Chat({setModalVisible,roomId,userName,socket}) {
 
     const submitMessage = ()=>{
         if(messageText!==''){
-        socket.emit('chat message',{ roomId: roomId, userName: userName,messageText:messageText });
+        socket.emit('chat message',{ roomId: roomId, userName: userName,messageText:base64.encode(messageText) });
         //console.log(messageText)
         setMessageText(''); 
         }
     }
 
     useEffect(() => {
-        submitMessage();
+        // setMessageText("est connecté");
+        // submitMessage();
+        
         socket.on('messages',(msg) => {
             //console.log(msg)
             msg = msg.filter((msgs) => msgs.roomId === roomId)
@@ -72,13 +75,13 @@ function Chat({setModalVisible,roomId,userName,socket}) {
                                 (
                                     <View style={styles.sendMsg}>
                                         <Text style={styles.name}> {item.userName}</Text>
-                                        <Text style={styles.msg}>{item.msg}</Text>
+                                        <Text style={styles.msg}>{base64.decode(item.msg)}</Text>
                                     </View>
                                 ): 
                                 (
                                 <View style={styles.RecivedMsg}>
                                     <Text style={styles.name}> {item.userName}</Text>
-                                    <Text style={styles.msg}>{item.msg}</Text>
+                                    <Text style={styles.msg}>{base64.decode(item.msg)}</Text>
                                 </View>
                                     
                                 )

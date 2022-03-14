@@ -64,7 +64,7 @@ const MeetingRooms = () =>{
   };
 
   useEffect(() => {
-    const API_URL = "https://377c-105-68-144-89.ngrok.io";
+    const API_URL = "https://11d2-105-68-144-89.ngrok.io";
     socket = io(API_URL);
     socket.on("connection", () => {
       console.log("connected");
