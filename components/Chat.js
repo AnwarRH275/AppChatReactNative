@@ -1,10 +1,14 @@
 import { Platform } from 'expo-modules-core';
 import React,{useState,useEffect} from 'react'
-import {KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard,View,Text,StyleSheet,TextInput,SafeAreaView,TouchableOpacity } from 'react-native';
+import {FlatList,KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard,View,Text,StyleSheet,TextInput,SafeAreaView,TouchableOpacity } from 'react-native';
 
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import tw from 'tailwind-rn';
 import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import ChatHeader from './ChatHeader';
+import MessageList from './MessageList';
+import SendMessage from './SendMessage';
+import RecivedMessage from './RecivedMessage';
 
 
 
@@ -13,19 +17,22 @@ function Chat({setModalVisible,roomId,userName,socket}) {
     const [messageTexts,setMessageTexts] = useState([]);
 
     const submitMessage = ()=>{
+        if(messageText!==''){
         socket.emit('chat message',{ roomId: roomId, userName: userName,messageText:messageText });
         //console.log(messageText)
         setMessageText(''); 
+        }
     }
 
     useEffect(() => {
-        
+        submitMessage();
         socket.on('messages',(msg) => {
             //console.log(msg)
+            msg = msg.filter((msgs) => msgs.roomId === roomId)
             setMessageTexts(msg);
             
         });
-      
+        
         return () => {
             setMessageTexts([]);
           };
@@ -45,13 +52,47 @@ function Chat({setModalVisible,roomId,userName,socket}) {
                 <View style={{flex:1}}>
                     <ChatHeader setModalVisible={setModalVisible}/>
                     {/* Chat Message */}
+                    
+                    {/* <MessageList 
+                        messageTexts={messageTexts}
+                        userName={userName}
+                        roomId={roomId}
+                    
+                    /> */}
+                    
                     <View style={styles.chatMessages}>
-                    {messageTexts
+
+                        <FlatList 
+                            contentContainerStyle={{ flexDirection: 'column-reverse'}}
+                            data={messageTexts}
+                            inverted
+                            keyExtractor={(item, index) => 'key'+index}
+                            renderItem={
+                                ({item})=> (item.roomId === roomId && item.userName === userName) ?
+                                (
+                                    <View style={styles.sendMsg}>
+                                        <Text style={styles.name}> {item.userName}</Text>
+                                        <Text style={styles.msg}>{item.msg}</Text>
+                                    </View>
+                                ): 
+                                (
+                                <View style={styles.RecivedMsg}>
+                                    <Text style={styles.name}> {item.userName}</Text>
+                                    <Text style={styles.msg}>{item.msg}</Text>
+                                </View>
+                                    
+                                )
+                            }
+
+                        
+                        />
+                    {/* {messageTexts
                         .map((user, index) => (
                         <View style={styles.chatContainer} key={index}>
                             <Text style={{ color: "white" }}>{user?.msg}</Text>
+                            
                         </View>
-                        ))}
+                        ))} */}
                     </View>
                     {/* Type ege */}
                     <View style={styles.chatFormContainer}>
@@ -86,6 +127,42 @@ function Chat({setModalVisible,roomId,userName,socket}) {
 }
 
 const styles = StyleSheet.create({
+    
+    msg:{
+        color:'white',
+    },
+    sendMsg:{
+        alignItems:'flex-end',
+        marginTop:8,
+        marginLeft:8,
+        marginRight:8,
+        padding:6,
+       
+        alignSelf:'flex-end',
+        borderTopRightRadius:12,
+        borderBottomLeftRadius:12,
+        borderTopLeftRadius:12,
+        backgroundColor:"#0b71eb"
+    },
+    RecivedMsg:{
+        alignItems:'flex-start',
+        marginTop:8,
+        marginLeft:8,
+        marginRight:8,
+        padding:6,
+       
+        alignSelf:'flex-start',
+        borderTopRightRadius:12,
+        
+        borderTopLeftRadius:12,
+        borderBottomRightRadius:12,
+        backgroundColor:"#373538"
+    },
+    name:{
+        color:'white',
+        fontWeight:'bold',
+        fontSize:16
+    },
     container:{
         flex:1,
         backgroundColor:'#1c1c1c'
@@ -119,7 +196,8 @@ const styles = StyleSheet.create({
         borderRadius:12
     },
     chatMessages:{
-        flex:1
+        flex:1,
+        marginBottom:8 
     }
 })
 

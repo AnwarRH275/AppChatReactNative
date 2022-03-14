@@ -5,7 +5,7 @@ import Entypo from 'react-native-vector-icons/Entypo'
 function Header() {
   return (
     <View style={styles.container}>
-       <Entypo name='notification' size={30} color="#efefef" />
+       <Entypo name='menu' size={30} color="#efefef" />
        <Text style={styles.header}> Messagerie & Appel </Text>
        <Entypo name='new-message' size={30} color="#efefef" />
     </View>
