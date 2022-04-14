@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,Text,StyleSheet,TextInput } from 'react-native'
+import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
 
@@ -22,6 +22,7 @@ const StartAppel = ({ name, setName, roomId, setRoomId, joinRoom }) => {
           placeholder="Enter number phone"
           placeholderTextColor="#767476"
           onChangeText={(text) => setRoomId(text)}
+          keyboardType="numeric"
         />
       </View>
       <View

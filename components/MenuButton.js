@@ -1,37 +1,43 @@
 import React from 'react'
 import {View,Text,StyleSheet,TouchableOpacity} from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'; 
 
 
 const items=[
     {
         id:1,
-        name:"phone",
-        title:"Appel",
-        customColor:'green'
+        name:"adduser",
+        title:"Ajouté contact",
+        customColor:'green',
+        navigate:"Room"
     },
     {
         id:2,
         name:"comments",
-        title:"Discussions"
+        title:"Discussions",
+        navigate:"Chat"
     },
     {
         id:3,
-        name:"calendar",
-        title:"Calendier"
+        name:"phone",
+        title:"Appels",
+        navigate:"Call"
     },
     {
         id:4,
-        name:"upload",
-        title:"Partage"
+        name:"Settings",
+        title:"Paramètres",
+        navigate:"Settings"
     },
 
 ]
 
 function MenuButton({navigation}) {
 
-    const openMeeting = ()=>{
-        navigation.navigate("Room")
+    const openMeeting = (nav)=>{
+        navigation.navigate(nav)
     }
 
   return (
@@ -43,12 +49,14 @@ function MenuButton({navigation}) {
                 key={index}
               style={styles.buttonContainer}>
                 <TouchableOpacity
-                onPress={() => openMeeting()}
+                onPress={() => openMeeting(item.navigate)}
                 style={{...styles.button,
                     backgroundColor:item.customColor ? item.customColor :"#0470Dc"}}
                 >
-                        <FontAwesome name={item.name} size={23} color="#efefef"/>
-                        
+                    {item.name === "adduser" ?  <MaterialIcons name="add-ic-call" size={23} color="#efefef" /> :
+                    item.name === "Settings" ? <Ionicons name="settings-outline" size={23} color="#efefef" /> :
+                    <FontAwesome name={item.name} size={23} color="#efefef"/> }    
+                       
                 </TouchableOpacity>
                 <Text style={styles.menuText} >{item.title}</Text>
 

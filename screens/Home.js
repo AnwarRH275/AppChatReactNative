@@ -1,5 +1,5 @@
 import React from 'react';
-import {View,SafeAreaView,StyleSheet} from 'react-native'
+import {View,SafeAreaView,StyleSheet,ScrollView} from 'react-native'
 import ContactMenu from '../components/ContactMenu';
 import Header from '../components/Header';
 import MenuButton from '../components/MenuButton';
@@ -15,13 +15,14 @@ function Home({navigation}) {
             <Header/>
         {/* searchbar */}
             <SearchBar/> 
-        {/* menuButton */}
-            <MenuButton navigation={navigation}/>
+        <ScrollView>
+            {/* menuButton */}
+                <MenuButton navigation={navigation}/>
 
-         {/*  contact */}
+            {/*  contact */}
 
-         <ContactMenu/>
-             
+            <ContactMenu/>
+         </ScrollView>  
          </SafeAreaView>
     </View>
   )
