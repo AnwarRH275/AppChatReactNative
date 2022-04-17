@@ -15,15 +15,16 @@ const items=[
     },
     {
         id:2,
-        name:"comments",
-        title:"Discussions",
-        navigate:"Chat"
+        name:"video-camera",
+        title:"Appels",
+        navigate:"Call"
     },
     {
         id:3,
-        name:"phone",
-        title:"Appels",
-        navigate:"Call"
+        name:"comments",
+        title:"Discussions",
+        navigate:"Chat"
+       
     },
     {
         id:4,

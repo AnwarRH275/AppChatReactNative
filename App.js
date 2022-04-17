@@ -5,8 +5,14 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Home from './screens/Home';
 import Navigation from './navigation/Navigation';
 import AppIntroSlider from 'react-native-app-intro-slider';
-import React from "react";
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import React,{useState} from "react";
+import 'react-native-gesture-handler'; 
+
+
+
+
+
+
 
 const slides = [
   {
@@ -21,23 +27,29 @@ const slides = [
     title: "TAKE A BREAK",
     text:
       "Lorem ipsum dolor sit amet consecte tuer adipsing elit sed diam monum my nibh eusimod eltor",
-    image: require("./imagesOnBording/2.png"),
+    image: require("./imagesOnBording/Hello.gif"),
   },
   {
     key: "three",
     title: "ENJOY YOUR JOURNEY",
     text:
       "Lorem ipsum dolor sit amet consecte tuer adipsing elit sed diam monum my nibh eusimod eltor",
-    image: require("./imagesOnBording/3.png"),
+    image: require("./imagesOnBording/Glowinguniverse.gif"),
   },
 ];
 
 
 export default class App extends React.Component {
+
+ 
   state = { showHomePage: false };
+
+
+
   _renderItem = ({ item }) => {
     return (
-      <View style={{ flex: 1, backgroundColor: "#1c1c1c" ,width:"100%" }}>
+      <View style={{ flex: 1, backgroundColor: "#030310" ,width:"100%" }}>
+        <View style={{  justifyContent: "center", alignItems: "center",width:"100%"}}>
         <Image
           source={item.image}
           style={{
@@ -48,6 +60,7 @@ export default class App extends React.Component {
          
           }}
         />
+        </View>
         <Text
           style={{
             paddingTop: 10,
@@ -102,6 +115,8 @@ export default class App extends React.Component {
     this.setState({ showHomePage: true });
   }
   render() {
+
+
     if (this.state.showHomePage) {
       return <Navigation />
     } else
