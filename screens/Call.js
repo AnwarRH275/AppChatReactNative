@@ -4,14 +4,16 @@ import ContactMenu from '../components/ContactMenu';
 import SearchBar from '../components/SearchBar';
 import {View,SafeAreaView,StyleSheet,ScrollView} from 'react-native'
 
-const Call = () => {
+const Call = ({navigation}) => {
+
+    
     return (
     <View style={styles.container}>
         <SafeAreaView style={{height:"100%"}}>
             <ScrollView>
                 <SearchBar/> 
                
-                <ContactMenu/>
+                <ContactMenu navigation={navigation}/>
             </ScrollView>  
          </SafeAreaView>
      </View>

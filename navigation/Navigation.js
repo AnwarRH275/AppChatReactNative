@@ -7,93 +7,187 @@ import Call from '../screens/Call';
 import Settings from '../screens/settings';
 import Discussions from '../screens/Discussion';
 import EditProfil from '../screens/EditProfil';
+import AddContact from '../screens/AddContact';
+import SigninScreen from '../screens/SigninScreen';
+import SignupScreen from '../screens/SignupScreen';
+import RegisterPhoneScreen from '../screens/RegisterPhoneScreen';
 
-function Navigation() {
+function Navigation({userToken}) {
     const stack = createStackNavigator();
   return (
     <NavigationContainer>
-        <stack.Navigator initialRouteName={Home}>
-            <stack.Screen
-                name="Home"
-                options={{headerMode: 'none', headerShown : false}}
-                component={Home }
-            />
-            <stack.Screen
+        
+        <stack.Navigator initialRouteName={SigninScreen}>
+         <stack.Screen
+        
+         name="SigninScreen"
+         component={SigninScreen }
+         options={{
+             title:"S'identifier",
+             headerStyle:{
+                 backgroundColor:'#1c1c1c',
+                 shadowOpacity:0,
+                 
+             },
+             headerTintColor:'white',
+                headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize:25,
+                }
+            //  headerMode: 'none', headerShown : true
+         }
 
-                name="Room"
-                component={MeetingRooms }
+         }
+         />
+         
+         <stack.Screen
+
+             name="SignupScreen"
+             component={SignupScreen }
+             options={{
+                 title:"S'inscrire",
+                 headerStyle:{
+                     backgroundColor:'#1c1c1c',
+                     shadowOpacity:0
+                 },
+                 headerTintColor:'white',
+                 headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize:25,
+                }
+                //  headerMode: 'none', headerShown : false
+             }
+
+             }
+             /> 
+
+                <stack.Screen
+
+                name="RegisterPhoneScreen"
+                component={RegisterPhoneScreen }
                 options={{
-                    title:"Appels",
+                    title:"Entrer un téléphone",
                     headerStyle:{
                         backgroundColor:'#1c1c1c',
                         shadowOpacity:0
                     },
                     headerTintColor:'white',
-                    
+                    headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize:25,
                 }
-                
-            }
-            />
-            <stack.Screen
+                //  headerMode: 'none', headerShown : false
+                }
 
-                    name="Chat"
-                    component={Discussions }
-                    options={{
-                        title:"Discussions",
-                        headerStyle:{
-                            backgroundColor:'#1c1c1c',
-                            shadowOpacity:0
-                        },
-                        headerTintColor:'white',
-                        
-                    }
-
-                    }
-                    />
-
-            <stack.Screen
-                name="Call"
-                component={Call }
-                options={{
-                    title:"Appel",
-                    headerStyle:{
-                        backgroundColor:'#1c1c1c',
-                        shadowOpacity:0
-                    },
-                    headerTintColor:'white',
-                    
                 }
-                }
-                />
-            <stack.Screen
-                name="Settings"
-                component={Settings }
-                options={{
-                    title:"Paramètres",
-                    headerStyle:{
-                        backgroundColor:'#1c1c1c',
-                        shadowOpacity:0
-                    },
-                    headerTintColor:'white',
-                    
-                }
-                }
-                />
+                /> 
+       
+       
+             
+             <stack.Screen
+                 name="Home"
+                 options={{headerMode: 'none', headerShown : false}}
+                 component={Home }
+             />
+ 
                  <stack.Screen
-                    name="EditProfil"
-                    component={EditProfil}
-                    options={{
-                        title:"Edité le Profile",
-                        headerStyle:{
-                            backgroundColor:'#1c1c1c',
-                            shadowOpacity:0
-                        },
-                        headerTintColor:'white',
-                        
-                    }
+ 
+                 name="AddContact"
+                 component={AddContact }
+                 options={{
+                     title:"Ajouté un contact",
+                     headerStyle:{
+                         backgroundColor:'#1c1c1c',
+                         shadowOpacity:0
+                     },
+                     headerTintColor:'white',
+                     
                  }
-                />
-        </stack.Navigator>
+ 
+                 }
+                 />
+ 
+ 
+            
+             <stack.Screen
+ 
+                 name="MeetingRooms"
+                 component={MeetingRooms }
+                 options={{
+                     title:"Start Appel",
+                     headerStyle:{
+                         backgroundColor:'#1c1c1c',
+                         shadowOpacity:0
+                     },
+                     headerTintColor:'white',
+                     
+                 }
+                 
+             }
+             />
+             <stack.Screen
+ 
+                     name="Chat"
+                     component={Discussions }
+                     options={{
+                         title:"Discussions",
+                         headerStyle:{
+                             backgroundColor:'#1c1c1c',
+                             shadowOpacity:0
+                         },
+                         headerTintColor:'white',
+                         
+                     }
+ 
+                     }
+                     />
+ 
+             <stack.Screen
+                 name="Call"
+                 component={Call }
+                 options={{
+                     title:"Appel",
+                     headerStyle:{
+                         backgroundColor:'#1c1c1c',
+                         shadowOpacity:0
+                     },
+                     headerTintColor:'white',
+                     
+                 }
+                 }
+                 />
+             <stack.Screen
+                 name="Settings"
+                 component={Settings }
+                 options={{
+                     title:"Paramètres",
+                     headerStyle:{
+                         backgroundColor:'#1c1c1c',
+                         shadowOpacity:0
+                     },
+                     headerTintColor:'white',
+                     
+                 }
+                 }
+                 />
+                  <stack.Screen
+                     name="EditProfil"
+                     component={EditProfil}
+                     options={{
+                         title:"Edité le Profile",
+                         headerStyle:{
+                             backgroundColor:'#1c1c1c',
+                             shadowOpacity:0
+                         },
+                         headerTintColor:'white',
+                         
+                     }
+                  }
+                 />
+                  </stack.Navigator>
+        
+        
+       
     </NavigationContainer>
   )
 }

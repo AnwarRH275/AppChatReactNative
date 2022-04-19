@@ -45,7 +45,7 @@ function Home({navigation}) {
 
             {/*  contact */}
 
-            <ContactMenu/>
+            <ContactMenu navigation={navigation}/>
          </ScrollView>  
          </SafeAreaView>
     </View>

@@ -11,7 +11,7 @@ const items=[
         name:"adduser",
         title:"Ajouté contact",
         customColor:'green',
-        navigate:"Room"
+        navigate:"AddContact"
     },
     {
         id:2,

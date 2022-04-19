@@ -39,9 +39,9 @@ const menuIcons = [
 
 let socket;
 
-const MeetingRooms = () =>{
+const MeetingRooms = ({navigation,route}) =>{
 
- 
+  
 
   const [name, setName] = useState("");
   const [roomId, setRoomId] = useState("");
@@ -49,6 +49,8 @@ const MeetingRooms = () =>{
   const [startCamera, setStartCamera] = useState(false);
 
   const [modalVisible,setModalVisible] = useState(false)
+
+
 
   const __startCamera = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync();
@@ -63,8 +65,15 @@ const MeetingRooms = () =>{
     socket.emit("join-room", { roomId: roomId, userName: name });
   };
 
+
+  const  {nameUser,number,call}  = route.params;
+
+  
   useEffect(() => {
-    const API_URL = "https://2d3a-197-253-233-68.ngrok.io";
+
+    
+
+    const API_URL = "https://57ca-105-72-240-187.ngrok.io";
     socket = io(API_URL);
     socket.on("connection", () => {
       console.log("connected");
@@ -72,10 +81,22 @@ const MeetingRooms = () =>{
     socket.on("all-users", (users) => {
       setActiveUsers(users);
     });
-
+      
+    if(nameUser && number){
+      setName(nameUser)
+      setRoomId(number)
+      setModalVisible(call)
+      //console.log(nameUser)
+      setActiveUsers([{name:nameUser,number:number}])
+      
+      joinRoom()
+      
+    }
     return () => {
       setActiveUsers([]);
     };
+
+    
   }, []);
 
 
@@ -145,6 +166,7 @@ const MeetingRooms = () =>{
           roomId={roomId}
           setRoomId={setRoomId}
           joinRoom={joinRoom} 
+          navigation={navigation}
         />
       )}
     </View>

@@ -1,5 +1,5 @@
 import React from 'react'
-import {View,Text,StyleSheet,Image} from 'react-native'
+import {View,Text,StyleSheet,Image,TouchableOpacity} from 'react-native'
 import AntDesgin from 'react-native-vector-icons/AntDesign'
 
 const contactMenuItems = [
@@ -9,28 +9,41 @@ const contactMenuItems = [
     },
     {
         type:"contact",
-        name:"Anwar ERHANI",
+        name:"Anwar Progess",
+        number:'123456789',
         photo:require('../assets/male-13.jpg')
     },
     {
         type:"contact",
         name:"Amine Algoting",
+        number:'123456789',
         photo:require('../assets/male-14.jpg')
     },
     {
         type:"contact",
         name:"First Client",
+        number:'123456789',
         photo:require('../assets/male-15.jpg')
     }
 
 ]
 
-function ContactMenu() {
+
+function ContactMenu({navigation}) {
+
+    const goChat = (nameUser,number) =>{
+       navigation.navigate('MeetingRooms',{nameUser:nameUser,number:number,call:false})
+      
+    }
+
   return (
     <View style={styles.container}>
         {contactMenuItems.map((contact,index)=>
+        <TouchableOpacity key={index}
+        onPress={() => goChat(contact.name,contact.number)}
+        >
         <View
-        key={index}
+        
          style={styles.row}>
             {/* Image */}
             {contact.type=='starred' ? 
@@ -47,6 +60,7 @@ function ContactMenu() {
                 {contact.name}
             </Text>
         </View>
+        </TouchableOpacity>
 )}
     </View>
   )

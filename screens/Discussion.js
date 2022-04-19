@@ -16,10 +16,16 @@ import {
 
   
 const Discussions = ({navigation}) => {
+
+  const goChat = (nameUser,number) =>{
+    navigation.navigate('MeetingRooms',{nameUser:nameUser,number:number,call:true})
+   
+ }
     const Messages = [
         {
           id: '1',
           userName: 'Jenny Doe',
+          number:'123456789',
           userImg: require('../assets/male-13.jpg'),
           messageTime: '4 mins ago',
           messageText:
@@ -28,6 +34,7 @@ const Discussions = ({navigation}) => {
         {
           id: '2',
           userName: 'John Doe',
+          number:'123456789',
           userImg: require('../assets/female-04.jpg'),
           messageTime: '2 hours ago',
           messageText:
@@ -44,6 +51,7 @@ const Discussions = ({navigation}) => {
         {
           id: '4',
           userName: 'Selina Paul',
+          number:'123456789',
           userImg: require('../assets/male-14.jpg'),
           messageTime: '1 day ago',
           messageText:
@@ -52,6 +60,7 @@ const Discussions = ({navigation}) => {
         {
           id: '5',
           userName: 'Christy Alex',
+          number:'123456789',
           userImg: require('../assets/female-08.jpg'),
           messageTime: '2 days ago',
           messageText:
@@ -69,7 +78,7 @@ const Discussions = ({navigation}) => {
           data={Messages}
           keyExtractor={item=>item.id}
           renderItem={({item}) => (
-            <Card onPress={() => navigation.navigate('Chat')}>
+            <Card onPress={() => goChat(item.userName,item.number)}>
               <UserInfo>
                 <UserImgWrapper>
                   <UserImg source={item.userImg} />

@@ -2,8 +2,25 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { color } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes'
+import { showMessage } from "react-native-flash-message";
 
-const StartAppel = ({ name, setName, roomId, setRoomId, joinRoom }) => {
+
+const StartAppel = ({navigation, name, setName, roomId, setRoomId, joinRoom }) => {
+
+  
+
+  const addContact = () => {
+    if (name !== '' && roomId !== '') {
+      
+      showMessage({
+        message: "Contact Ajouter",
+        description: name+" a été ajouté",
+        type: "success",
+      });
+      navigation.navigate('Home');
+    }
+  }
+
   return (
     <View style={styles.startMeetingContainer}>
       <View style={styles.info}>
@@ -30,14 +47,14 @@ const StartAppel = ({ name, setName, roomId, setRoomId, joinRoom }) => {
           alignItems: "center",
         }}
       >
-        <TouchableOpacity style={styles.startMeetingButton} onPress={joinRoom}>
+        <TouchableOpacity style={styles.startMeetingButton} onPress={addContact}>
           <Text
             style={{
               color: "white",
               fontWeight: "bold",
             }}
           >
-            Appler
+            Ajouter
           </Text>
         </TouchableOpacity>
       </View>

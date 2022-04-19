@@ -8,10 +8,8 @@ import AppIntroSlider from 'react-native-app-intro-slider';
 import React,{useState} from "react";
 import 'react-native-gesture-handler'; 
 
-
-
-
-
+import FlashMessage from "react-native-flash-message";
+import SigninScreen from './screens/SigninScreen';
 
 
 const slides = [
@@ -42,7 +40,7 @@ const slides = [
 export default class App extends React.Component {
 
  
-  state = { showHomePage: false };
+  state = { showHomePage: 0 };
 
 
 
@@ -112,14 +110,20 @@ export default class App extends React.Component {
   _onDone = () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    this.setState({ showHomePage: true });
+    this.setState({ showHomePage: 1 });
   }
   render() {
 
 
-    if (this.state.showHomePage) {
-      return <Navigation />
-    } else
+    if (this.state.showHomePage !== 0) {
+      return (
+        <View style={{ flex: 1 }}>
+            <Navigation userToken ={this.state.showHomePage}/>
+            <FlashMessage position="top" /> 
+        </View>
+      );
+    
+    }else
       return (
         <AppIntroSlider
           renderItem={this._renderItem}
