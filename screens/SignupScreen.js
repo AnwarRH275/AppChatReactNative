@@ -26,8 +26,8 @@ import Colors from '../constants/Colors';
 import Images from '../constants/Images';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import Navigation from '../navigation/Navigation';
 
+import { showMessage } from "react-native-flash-message";
 
 const SigninScreen = ({navigation}) => {
 
@@ -41,6 +41,18 @@ const SigninScreen = ({navigation}) => {
     const [emailErrorMessage, setEmailErrorMessage] = useState('');
     const [emailState, setEmailState] = useState('default');
     const [usernameState, setUsernameState] = useState('default');
+
+    const bienvenue = () => {
+      if (username !== '') {
+        
+        showMessage({
+          message: "Bienvenue "+username,
+          description: "Vous pouvez naviguer dans l'application en tout sécurité",
+          type: "success",
+        });
+        navigation.navigate('Home',{userToken:2});
+      }
+    }
 
     const inputStyle = state => {
         switch (state) {
@@ -123,10 +135,12 @@ const showMarker = state => {
           />
           <Text style={styles.headerTitle}>Sign Up</Text>
         </View> */}
-        <Text style={styles.title}>Create Account</Text>
-        <Text style={styles.content}>
-        Entrez votre email, choisissez un nom d'utilisateur et un mot de passe
-        </Text>
+        <View style={{alignItems:'center'}}>
+          <Text style={styles.title}>Create Account</Text>
+          <Text style={styles.content}>
+          Entrez votre email, choisissez un nom d'utilisateur et un mot de passe
+          </Text>
+        </View>
         <View style={inputStyle(usernameState)}>
 
           <View style={styles.inputSubContainer}>
@@ -137,6 +151,7 @@ const showMarker = state => {
               style={{marginRight: 10}}
             />
             <TextInput
+              autoCorrect={false}
               placeholder="Username"
               placeholderTextColor={Colors.DEFAULT_GREY}
               selectionColor={Colors.DEFAULT_GREY}
@@ -161,6 +176,7 @@ const showMarker = state => {
             />
             <TextInput
               placeholder="Email"
+              autoCorrect={false}
               placeholderTextColor={Colors.DEFAULT_GREY}
               selectionColor={Colors.DEFAULT_GREY}
               style={styles.inputText}
@@ -199,7 +215,7 @@ const showMarker = state => {
           </View>
         </View>
         <Text style={styles.errorMessage}>{errorMessage}</Text>
-        <TouchableOpacity style={styles.signinButton} onPress={()=> navigation.navigate('Home',{userToken:2})}>
+        <TouchableOpacity style={styles.signinButton} onPress={()=>navigation.navigate('RegisterPhoneScreen',{username:username})}>
           {isLoading ? (
             <LottieView source={Images.LOADING} autoPlay />
           ) : (
@@ -248,22 +264,32 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     title: {
-      fontSize: 20,
+      fontSize: 23,
+            fontWeight: "bold",
+            color: "#efefef",
+            alignSelf: "center",
+      
       fontFamily: 'Poppins-Medium',
       lineHeight: 20 * 1.4,
       marginTop: 50,
       marginBottom: 10,
       marginHorizontal: 20,
+      color:"#fff"
     },
     content: {
-      fontSize: 20,
+      textAlign: "center",
+          color: "#b5b5b5",
+          fontSize: 15,
+          paddingHorizontal: 30,
+ 
       fontFamily: 'Poppins-Medium',
       marginTop: 10,
       marginBottom: 20,
       marginHorizontal: 20,
+      color:"#fff"
     },
     inputContainer: {
-      backgroundColor: Colors.LIGHT_GREY,
+      backgroundColor: "#373538",
       paddingHorizontal: 10,
       marginHorizontal: 20,
       borderRadius: 8,
@@ -276,11 +302,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     inputText: {
+ 
       fontSize: 18,
       textAlignVertical: 'center',
       padding: 0,
       height: Display.setHeight(6),
-      color: Colors.DEFAULT_BLACK,
+      color: "#fff",
       flex: 1,
     },
     signinButton: {
@@ -295,7 +322,7 @@ const styles = StyleSheet.create({
     signinButtonText: {
       fontSize: 18,
       lineHeight: 18 * 1.4,
-      color: Colors.DEFAULT_WHITE,
+      color: "white",
       fontFamily: 'Poppins-Medium',
     },
     orText: {
@@ -331,7 +358,7 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     socialSigninButtonText: {
-      color: Colors.DEFAULT_WHITE,
+      color: "white",
       fontSize: 13,
       lineHeight: 13 * 1.4,
       fontFamily: 'Poppins-Medium',

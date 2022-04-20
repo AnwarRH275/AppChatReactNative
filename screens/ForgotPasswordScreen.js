@@ -1,6 +1,4 @@
-
-import React, {useState, useRef} from 'react';
- 
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -18,18 +16,11 @@ import Images from '../constants/Images';
 import {Display} from '../utils';
 import * as Font from 'expo-font';
 import AppLoading from 'expo-app-loading';
-import PhoneInput from 'react-native-phone-input'
 
 
-const RegisterPhoneScreen = ({navigation,route}) => {
+const ForgotPasswordScreen = () => {
 
-  const [phoneNumber, setPhoneNumber] = useState('');
- 
-  const phoneInput = useRef(null);
-  const  {username}  = route.params;
-  const getPhoneNumber = () => {
-    Alert.alert(phoneNumber);
-  };
+
 
     const fetchFonts = () => {
         return Font.loadAsync({
@@ -51,7 +42,6 @@ const RegisterPhoneScreen = ({navigation,route}) => {
             />
         );
         }
- 
 
     return (
       <View style={styles.container}>
@@ -69,37 +59,28 @@ const RegisterPhoneScreen = ({navigation,route}) => {
           />
           <Text style={styles.headerTitle}>Forgot Password</Text>
         </View> */}
-        <Text style={styles.title}>Inscrire un téléphone</Text>
+        <Text style={styles.title}>Récupérer votre compte</Text>
         <Text style={styles.content}>
-        Entrez votre numéro de téléphone enregistré pour vous connecter. 
+        Entrez votre email, afin que nous puissions vous aider à récupérer votre mot de passe.
         </Text>
         <View style={styles.inputContainer}>
           <View style={styles.inputSubContainer}>
-    
-
-        <PhoneInput
-                ref={phoneInput}
-                autoFormat={true}
-                offset={10}
-                initialCountry={'ma'}
-                defaultValue={phoneNumber}
-                textStyle={{ color:"#fff"}}
-                flagStyle={{width: 35, height: 25, borderWidth:0}}
-                onChangePhoneNumber={(value,iso2) => {
-                  setPhoneNumber(value);
-                  console.log(value);
-                }}
-
-                containerStyle={styles.inputText}
-                textProps={{
-                    placeholder: 'Enter a phone number...'
-                }}
+            <Feather
+              name="mail"
+              size={22}
+              color={Colors.DEFAULT_GREY}
+              style={{marginRight: 10}}
             />
-
+            <TextInput
+              placeholder="Email"
+              placeholderTextColor={Colors.DEFAULT_GREY}
+              selectionColor={Colors.DEFAULT_GREY}
+              style={styles.inputText}
+            />
           </View>
         </View>
-        <TouchableOpacity style={styles.signinButton} onPress={()=> navigation.navigate('VerificationScreen',{phoneNumber:phoneNumber,username:username})}>
-          <Text style={styles.signinButtonText}>Continuez</Text>
+        <TouchableOpacity style={styles.signinButton}>
+          <Text style={styles.signinButtonText}>Reset Password</Text>
         </TouchableOpacity>
       </View>
     );
@@ -155,10 +136,6 @@ const RegisterPhoneScreen = ({navigation,route}) => {
       borderWidth: 0.5,
       borderColor: Colors.LIGHT_GREY2,
       justifyContent: 'center',
-      fontSize: 18,
-      textAlignVertical: 'center',
-      padding: 0,
-      height: Display.setHeight(6),
     },
     inputSubContainer: {
       flexDirection: 'row',
@@ -190,4 +167,4 @@ const RegisterPhoneScreen = ({navigation,route}) => {
     },
   });
   
-  export default RegisterPhoneScreen;
+  export default ForgotPasswordScreen;

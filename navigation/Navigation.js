@@ -11,6 +11,8 @@ import AddContact from '../screens/AddContact';
 import SigninScreen from '../screens/SigninScreen';
 import SignupScreen from '../screens/SignupScreen';
 import RegisterPhoneScreen from '../screens/RegisterPhoneScreen';
+import ForgotPasswordScreen from '../screens/ForgotPasswordScreen';
+import VerificationScreen from '../screens/VerificationScreen';
 
 function Navigation({userToken}) {
     const stack = createStackNavigator();
@@ -60,13 +62,54 @@ function Navigation({userToken}) {
 
              }
              /> 
+                <stack.Screen
+
+                name="ForgotPasswordScreen"
+                component={ForgotPasswordScreen }
+                options={{
+                    title:"Mot de passe oublié",
+                    headerStyle:{
+                        backgroundColor:'#1c1c1c',
+                        shadowOpacity:0
+                    },
+                    headerTintColor:'white',
+                    headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize:20,
+                }
+                //  headerMode: 'none', headerShown : false
+                }
+
+                }
+                />
+            
+            <stack.Screen
+
+                name="VerificationScreen"
+                component={VerificationScreen }
+                options={{
+                    title:"SMS",
+                    headerStyle:{
+                        backgroundColor:'#1c1c1c',
+                        shadowOpacity:0
+                    },
+                    headerTintColor:'white',
+                    headerTitleStyle:{
+                    fontWeight: 'bold',
+                    fontSize:20,
+                }
+                //  headerMode: 'none', headerShown : false
+                }
+
+                }
+                />
 
                 <stack.Screen
 
                 name="RegisterPhoneScreen"
                 component={RegisterPhoneScreen }
                 options={{
-                    title:"Entrer un téléphone",
+                    title:"Téléphone",
                     headerStyle:{
                         backgroundColor:'#1c1c1c',
                         shadowOpacity:0

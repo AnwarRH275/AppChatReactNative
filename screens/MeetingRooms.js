@@ -73,7 +73,7 @@ const MeetingRooms = ({navigation,route}) =>{
 
     
 
-    const API_URL = "https://57ca-105-72-240-187.ngrok.io";
+    const API_URL = "https://3204-105-72-240-187.ngrok.io";
     socket = io(API_URL);
     socket.on("connection", () => {
       console.log("connected");
@@ -128,7 +128,7 @@ const MeetingRooms = ({navigation,route}) =>{
               <Camera
                 type="front"
                 style={{
-                  width: activeUsers.length <= 1 ? "100%" : 200,
+                  width: activeUsers.length < 1 ? "100%" : 200,
                   height: activeUsers.length <= 1 ? 600 : 200,
                 }}
               ></Camera>

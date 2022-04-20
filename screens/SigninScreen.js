@@ -125,7 +125,7 @@ const SigninScreen = ({navigation}) => {
         </View>
         <Text
           style={styles.forgotPasswordText}
-          //onPress={() => navigation.navigate('ForgotPassword')}
+          onPress={() => navigation.navigate('ForgotPasswordScreen')}
           >
           Mot de passe oublié
         </Text>
@@ -205,22 +205,33 @@ const styles = StyleSheet.create({
       textAlign: 'center',
     },
     title: {
-      fontSize: 20,
+      fontSize: 23,
+      fontWeight: "bold",
+      color: "#efefef",
+      alignSelf: "center",
+
+
       fontFamily: 'Poppins-Medium',
       lineHeight: 20 * 1.4,
       marginTop: 50,
       marginBottom: 10,
       marginHorizontal: 20,
+      color: "#fff",
     },
     content: {
-      fontSize: 20,
+      textAlign: "center",
+          color: "#b5b5b5",
+          fontSize: 15,
+          paddingHorizontal: 30,
+    
       fontFamily: 'Poppins-Medium',
       marginTop: 10,
       marginBottom: 20,
       marginHorizontal: 20,
+      color: "#fff",
     },
     inputContainer: {
-      backgroundColor: Colors.LIGHT_GREY,
+      backgroundColor: "#373538",
       paddingHorizontal: 10,
       marginHorizontal: 20,
       borderRadius: 8,
@@ -237,7 +248,7 @@ const styles = StyleSheet.create({
       textAlignVertical: 'center',
       padding: 0,
       height: Display.setHeight(6),
-      color: Colors.DEFAULT_BLACK,
+      color: "#fff",
       flex: 1,
     },
     forgotPasswordContainer: {
@@ -271,7 +282,7 @@ const styles = StyleSheet.create({
     signinButtonText: {
       fontSize: 18,
       lineHeight: 18 * 1.4,
-      color: Colors.DEFAULT_WHITE,
+      color: "#fff",
       fontFamily: 'Poppins-Medium',
     },
     signupContainer: {
@@ -284,7 +295,7 @@ const styles = StyleSheet.create({
     accountText: {
       fontSize: 13,
       lineHeight: 13 * 1.4,
-      color: Colors.DEFAULT_BLACK,
+      color: "#fff",
      fontFamily: 'Poppins-Medium',
     },
     signupText: {
@@ -337,7 +348,7 @@ const styles = StyleSheet.create({
       width: '100%',
     },
     socialSigninButtonText: {
-      color: Colors.DEFAULT_WHITE,
+      color: "#fff",
       fontSize: 13,
       lineHeight: 13 * 1.4,
      fontFamily: 'Poppins-Medium',
